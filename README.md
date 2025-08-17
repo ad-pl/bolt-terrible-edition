@@ -25,7 +25,7 @@ Or you know, just, add the bot to your server. Feel free.
 * [`py-cord`](https://pypi.org/project/py-cord/) (`pip install py-cord`)
 * [`python-dotenv`](https://pypi.org/project/python-dotenv/) (`pip install python-dotenv`)
 * If using Python 3.13, also install [`audioop-lts`](https://pypi.org/project/audioop-lts)
-* Optional: [`colorama`](https://pypi.org/project/audioop-lts) so your logs look :sparkles:pretty:sparkles:
+* Optional: [`colorama`](https://pypi.org/project/colorama) so your logs look :sparkles:pretty:sparkles:
 
 if you're feeling lazy, just run:
 ```bash
