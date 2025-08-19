@@ -37,7 +37,7 @@ def get_env_var(var: str, default: Any, required=True, from_dot_env=True):
     
   return val
 
-def parse_duration(duration: str):
+def parse_duration(duration: str) -> int | bool | None: # the type annotations are insane on this one
   duration = duration.strip().lower()
   
   units = { # NOTE: this should probably be in bot.constants.config
@@ -71,6 +71,7 @@ async def say(ctx: discord.ApplicationContext | commands.Context, msg: str, is_s
     await ctx.send(msg)
 
 async def assert_guild(ctx, guild, user, is_slash=False):
+  # TODO: rewrite this
   if guild is None:
     console.log(f"{user} tried to run a command where it's not supported.", "LOG")
     await say(ctx, "You can't run that command here!", is_slash=is_slash, ephemeral=True)
