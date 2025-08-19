@@ -25,5 +25,5 @@ extensions = (
   "bot.cogs.invite",
   "bot.cogs.moderation.ban",
   "bot.cogs.moderation.kick",
-  "bot.cogs.moderation.timeout"
+  "bot.cogs.moderation.timeout",
 )
