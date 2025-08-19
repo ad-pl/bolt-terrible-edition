@@ -49,11 +49,14 @@ class Base(commands.Cog): # not actually a cog. it just inherits from commands.C
       self.verb_past = "kicked" if not self.is_un else "unkicked"
       return
   
-  def check_for_permissions(self, perm, user):
-    if not perm or perm not in perm_map:
+  def check_for_permissions(self, perm, user, _perm_map):
+    if not perm:
       return False # early return
     
-    if getattr(user.guild_permissions, perm_map[perm], False):
+    if not perm in _perm_map:
+      return False # ditto
+    
+    if getattr(user.guild_permissions, _perm_map[perm], False):
       return True # ditto
     
     return False
@@ -82,7 +85,7 @@ class Base(commands.Cog): # not actually a cog. it just inherits from commands.C
       console.log(f"{user} tried to {self.verb} themselves.", "LOG")
       return
     
-    if not self.check_for_permissions(action_type, user):
+    if not self.check_for_permissions(action_type, user, _perm_map=perm_map if not self.is_un else un_perm_map):
       await utils.say(ctx, f"You don't have permission to {self.verb} members.", is_slash=is_slash, ephemeral=True)
       console.log(f"{user} tried to {self.verb} {target} but doesn't have permission.", "LOG")
       return
