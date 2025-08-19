@@ -37,6 +37,33 @@ def get_env_var(var: str, default: Any, required=True, from_dot_env=True):
     
   return val
 
+def parse_duration(duration: str):
+  duration = duration.strip().lower()
+  
+  units = { # NOTE: this should probably be in bot.constants.config
+    "d": 86400, # days
+    "h": 3600,  # hours
+    "m": 60,    # minutes
+    "s": 1      # seconds
+  }
+
+  if not duration:
+    return None
+  
+  total_seconds = 0
+  num = ''
+
+  for char in duration:
+    if char.isdigit():
+      num += char
+    elif char in units:
+      if not num:
+        return False # meaning invalid
+      
+      total_seconds += int(num) * units[char]
+
+  return total_seconds if total_seconds > 0 else False
+
 async def say(ctx: discord.ApplicationContext | commands.Context, msg: str, is_slash=False, ephemeral=False):
   if is_slash and isinstance(ctx, discord.ApplicationContext): # just in case
     await ctx.respond(msg, ephemeral=ephemeral)
