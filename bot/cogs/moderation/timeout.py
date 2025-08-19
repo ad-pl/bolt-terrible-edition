@@ -19,36 +19,6 @@ import bot.utils as utils
 class Timeout(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-  
-  def parse_duration(self, duration: str):
-    # we are NOT using regex for this
-    # regex makes me have an aneurysm
-
-    _duration = duration.lower()
-
-    time_units = {
-      "d": 86400, # days
-      "h": 3600,  # hours
-      "m": 60,    # minutes
-      "s": 1      # seconds
-    }
-
-    total_seconds = 0
-    num = ''
-
-    for char in _duration:
-      if char.isdigit():
-        num += char
-      elif char in time_units:
-        if not num:
-          return False
-        
-        total_seconds += int(num) * time_units[char]
-        num = ''
-      else:
-        return False
-    
-    return total_seconds if total_seconds > 0 else False
 
   async def _mute(self, ctx, member: discord.Member, duration="30m", reason=None, is_slash=False):
     user = ctx.author
@@ -56,7 +26,11 @@ class Timeout(commands.Cog):
     if not await utils.assert_guild(ctx, guild=ctx.guild, user=user, is_slash=is_slash):
       return
 
-    seconds = self.parse_duration(duration)
+    seconds = utils.parse_duration(duration)
+
+    if seconds is None:
+      await utils.say(ctx, "You forgot to specify a duration. The default is 30 minutes.")
+      # no early return, just a warning.
 
     if not seconds:
       await utils.say(ctx, "Invalid duration format. Try `3d`, `1h`, `30m`, `45s`", is_slash=is_slash, ephemeral=True)
