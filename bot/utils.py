@@ -14,7 +14,7 @@ from discord.ext import commands
 ## pypkg
 
 import bot.console as console
-from bot.constants.config import env_path
+from bot.constants.config import env_path, units
 
 # FUNCTIONS
 
@@ -39,13 +39,6 @@ def get_env_var(var: str, default: Any, required=True, from_dot_env=True):
 
 def parse_duration(duration: str) -> int | bool | None: # the type annotations are insane on this one
   duration = duration.strip().lower()
-  
-  units = { # NOTE: this should probably be in bot.constants.config
-    "d": 86400, # days
-    "h": 3600,  # hours
-    "m": 60,    # minutes
-    "s": 1      # seconds
-  }
 
   if not duration:
     return None
