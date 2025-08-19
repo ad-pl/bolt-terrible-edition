@@ -36,17 +36,17 @@ class Base(commands.Cog): # not actually a cog. it just inherits from commands.C
 
     if self.timeout:
       self.verb = "mute"
-      self.verb_past = "muted"
+      self.verb_past = "muted" if not self.is_un else "unmuted"
       return
 
     if self.ban:
       self.verb = "ban"
-      self.verb_past = "banned"
+      self.verb_past = "banned" if not self.is_un else "unbanned"
       return
     
     if self.kick:
       self.verb = "kick"
-      self.verb_past = "kicked"
+      self.verb_past = "kicked" if not self.is_un else "unkicked"
       return
   
   def check_for_permissions(self, perm, user):
