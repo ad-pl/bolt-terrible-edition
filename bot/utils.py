@@ -54,6 +54,7 @@ def parse_duration(duration: str) -> int | bool | None: # the type annotations a
         return False # meaning invalid
       
       total_seconds += int(num) * units[char]
+      num = ''
 
   return total_seconds if total_seconds > 0 else False
 
