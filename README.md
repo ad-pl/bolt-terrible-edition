@@ -56,6 +56,13 @@ python -m bot
 ```
 to start the bot.
 
+> [!WARNING]
+> **Always run the bot from the repo root.**
+>
+> Running it from anywhere else will cause Bolt's code to trip over and not find the .env file,
+>
+> So Bolt will just end up crashing at boot.
+
 # uhhh bye
 
 made with <3 by spark
