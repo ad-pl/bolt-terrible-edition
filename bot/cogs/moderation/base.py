@@ -103,7 +103,7 @@ class Base(commands.Cog): # not actually a cog. it just inherits from commands.C
       # if seconds < 0 check is not required. parse_duration() will just kill itself if it sees a negative number anyway
 
       if seconds >= 2419200: # as in, 28 days.
-        if self.ban():
+        if self.ban:
           seconds = 0 # anything larger than 28 days and discord will die so we just make it a perma ban
         elif self.timeout: # made this into an elif just to sanity check
           await utils.say(ctx, "Dude you can't even mute someone for that long.", is_slash=is_slash, ephemeral=True)
