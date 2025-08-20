@@ -1,4 +1,9 @@
 # bot/console.py
+# NOTE: this file is literally empty aside from log()
+#       im not sure if console.log should be moved to utils.py
+#       one less file is always nice but it WOULD break literally
+#       every instance of console.log() which would need to be replaced with
+#       utils.log() which i will never get used to
 
 # LIBRARIES AND MODULES
 
