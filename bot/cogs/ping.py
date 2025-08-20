@@ -21,9 +21,11 @@ class Ping(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
   
-  async def _ping(self, ctx, is_slash=False):
-    latency = round(self.bot.latency * 1000)
+  async def _ping(self, ctx):
     user = ctx.author
+    is_slash = isinstance(ctx, discord.ApplicationContext)
+
+    latency = round(self.bot.latency * 1000)
 
     console.log(f"Ping requested by {user} ({user.id})", "LOG")
     console.log(f"Latency: {latency}ms", "INFO")
@@ -31,8 +33,10 @@ class Ping(commands.Cog):
     message = f"Pong! \n{latency}ms"
     await utils.say(ctx, message, is_slash=is_slash)
   
-  async def _uptime(self, ctx, is_slash=False):
+  async def _uptime(self, ctx):
     user = ctx.author
+    is_slash = isinstance(ctx, discord.ApplicationContext)
+
     console.log(f"Uptime requested by {user} ({user.id})", "LOG")
 
     if not hasattr(self.bot, "start_time"):
@@ -57,7 +61,7 @@ class Ping(commands.Cog):
 
   @commands.slash_command(name="ping", description="ping the bot!")
   async def slash_ping(self, ctx: discord.ApplicationContext):
-    await self._ping(ctx, is_slash=True)
+    await self._ping(ctx)
   
   @commands.command()
   async def uptime(self, ctx: commands.Context):
@@ -65,7 +69,7 @@ class Ping(commands.Cog):
   
   @commands.slash_command(name="uptime", description="see how long the bot has been running for!")
   async def slash_uptime(self, ctx: discord.ApplicationContext):
-    await self._uptime(ctx, is_slash=True)
+    await self._uptime(ctx)
 
 # FUNCTIONS
 

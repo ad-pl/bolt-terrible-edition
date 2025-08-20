@@ -14,7 +14,7 @@ from discord.ext import commands
 ## pypkg
 
 import bot.console as console
-from bot.constants.config import env_path
+from bot.constants.config import env_path, units
 
 # FUNCTIONS
 
@@ -37,15 +37,8 @@ def get_env_var(var: str, default: Any, required=True, from_dot_env=True):
     
   return val
 
-def parse_duration(duration: str):
+def parse_duration(duration: str) -> int | bool | None: # the type annotations are insane on this one
   duration = duration.strip().lower()
-  
-  units = { # NOTE: this should probably be in bot.constants.config
-    "d": 86400, # days
-    "h": 3600,  # hours
-    "m": 60,    # minutes
-    "s": 1      # seconds
-  }
 
   if not duration:
     return None
@@ -61,6 +54,7 @@ def parse_duration(duration: str):
         return False # meaning invalid
       
       total_seconds += int(num) * units[char]
+      num = ''
 
   return total_seconds if total_seconds > 0 else False
 
@@ -71,6 +65,7 @@ async def say(ctx: discord.ApplicationContext | commands.Context, msg: str, is_s
     await ctx.send(msg)
 
 async def assert_guild(ctx, guild, user, is_slash=False):
+  # TODO: rewrite this
   if guild is None:
     console.log(f"{user} tried to run a command where it's not supported.", "LOG")
     await say(ctx, "You can't run that command here!", is_slash=is_slash, ephemeral=True)

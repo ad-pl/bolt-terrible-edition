@@ -9,54 +9,24 @@ from discord.ext import commands
 
 ## pypkg
 
-from bot.constants import *
-import bot.console as console
-import bot.utils as utils
+from bot.cogs.moderation.base import Base
 
 # CLASSES
 
-class Kick(commands.Cog):
+class Kick(Base):
   def __init__(self, bot):
-    self.bot = bot
-
-  async def _kick(self, ctx, member: discord.Member, reason=None, is_slash=False):
-    user = ctx.author
-
-    if not await utils.assert_guild(ctx, guild=ctx.guild, user=user, is_slash=is_slash):
-      return
-
-    try:
-      if user == member:
-        console.log(f"{user} was an idiot and tried to kick themselves.", "LOG")
-        await utils.say(ctx, "You can't kick yourself!", is_slash=is_slash, ephemeral=True)
-        return
-      else:
-        console.log(f"{user} Kicked {member} {('for ' + reason) if reason else ''}", "LOG")
-        await member.kick(reason=reason or 'None provided.')
-
-    except discord.Forbidden:
-      console.log(f"Failed to kick {member}, permission denied.", "ERROR")
-      await utils.say(ctx, "I don't have permission to kick that user.", is_slash=is_slash, ephemeral=True)
-      return
-
-    except Exception as e:
-      console.log(f"Exception raised: {e}", "ERROR")
-      await utils.say(ctx, "Something went wrong, try again later.", is_slash=is_slash, ephemeral=True)
-      return
-
-    message = f"Kicked {member}. \nReason: {reason or 'None provided.'}"
-
-    await utils.say(ctx, message, is_slash=is_slash)
-
+    super().__init__(bot)
+    self.config(kick=True)
+  
   @commands.command()
   @commands.has_permissions(kick_members=True)
-  async def kick(self, ctx: commands.Context, member: discord.Member, *, reason=None):
-    await self._kick(ctx, member, reason)
+  async def kick(self, ctx: commands.Context, target: discord.Member, *, reason=None):
+    await self.action(ctx, target, "kick", reason)
   
-  @commands.slash_command(name="kick", description="kick a member.")
+  @commands.slash_command()
   @commands.has_permissions(kick_members=True)
-  async def slash_kick(self, ctx: discord.ApplicationContext, member: discord.Member, reason=None):
-     await self._kick(ctx, member, reason, is_slash=True)
+  async def slash_kick(self, ctx: discord.ApplicationContext, target: discord.Member, reason: str | None = None):
+    await self.action(ctx, target, "kick", reason)
 
 # FUNCTIONS
 
