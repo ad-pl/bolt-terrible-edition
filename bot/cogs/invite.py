@@ -18,8 +18,9 @@ class Invite(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
   
-  async def _invite(self, ctx, is_slash=False):
+  async def _invite(self, ctx):
     user = ctx.author
+    is_slash = isinstance(ctx, discord.ApplicationContext)
 
     message = """
 Add Bolt to your server!
@@ -38,7 +39,7 @@ https://discord.gg/hF6mgCE3gT
   
   @commands.slash_command(name="invite", description="invite the bot to your server!")
   async def slash_invite(self, ctx: discord.ApplicationContext):
-    await self._invite(ctx, is_slash=True)
+    await self._invite(ctx)
 
 # FUNCTIONS
 
