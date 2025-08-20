@@ -46,7 +46,7 @@ class Base(commands.Cog): # not actually a cog. it just inherits from commands.C
     
     if self.kick:
       self.verb = "kick"
-      self.verb_past = "kicked" if not self.is_un else "unkicked"
+      self.verb_past = "kicked" if not self.is_un else "unkicked" # i know that unkicking is impossible, but my point still stands.
       return
   
   def check_for_permissions(self, perm, user, _perm_map):
