@@ -11,7 +11,8 @@ from discord.ext import commands
 ## pypkg
 
 import bot.console as console
-from bot.constants.base import prefix
+import bot.constants.help_md as help_md
+## from bot.constants.base import prefix
 import bot.utils as utils
 
 # CLASSES
@@ -20,37 +21,22 @@ class Help(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
 
+  def fetch_help(self):
+    with open(help_md.help_md, "r", encoding="utf-8") as f:
+      help_data = f.read()
+    
+    for find, replace in help_md.find_and_replace.items():
+      help_data = help_data.replace(find, replace)
+    
+    return help_data
+
   async def _help(self, ctx):
     user = ctx.author
     is_slash = isinstance(ctx, discord.ApplicationContext)
 
     console.log(f"Help requested by {user} ({user.id})", "LOG")
 
-    # use markdown for that
-    message = f"""
-## Available Commands
-
-### Moderation
-
-`{prefix}ban`: Ban a member.
-`{prefix}unban`: Unban a previously banned member.
-`{prefix}kick`: Kick a member.
-`{prefix}mute`: Mute a member.
-`{prefix}unmute`: Unmute a member.
-
-### Misc
-
-`{prefix}help`: This message
-`{prefix}ping`: Ping Bolt.
-`{prefix}echo`: Make Bolt say something.
-`{prefix}invite`: Invite Bolt to your server.
-
-## Support Server
-Join the support server:
-https://discord.gg/hF6mgCE3gT
-
-Bolt is open source! You can find the code at https://github.com/sparkhere-sys/bolt
-"""
+    message = self.fetch_help()
     
     await utils.say(ctx, message, is_slash=is_slash)
 
