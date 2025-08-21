@@ -14,6 +14,6 @@ help_md = Path("bot/constants/help.md")
 find_and_replace = {
   # "find": "replace"
   "{prefix}": prefix,
-  "{support}": "https://discord.gg/hF6mgCE3gT",
-  "{repo}": "Bolt is open source! You can find the code at https://github.com/sparkhere-sys/bolt",
+  "{support}": "<https://discord.gg/hF6mgCE3gT>",
+  "{repo}": "Bolt is open source! You can find the code at <https://github.com/sparkhere-sys/bolt>",
 }
