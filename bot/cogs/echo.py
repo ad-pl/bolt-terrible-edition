@@ -9,7 +9,6 @@ from discord.ext import commands
 
 ## pypkg
 
-from bot.constants import *
 import bot.console as console
 import bot.utils as utils
 
