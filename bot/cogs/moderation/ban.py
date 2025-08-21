@@ -25,7 +25,7 @@ class Ban(Base):
   
   @commands.command()
   @commands.has_permissions(ban_members=True)
-  async def unban(self, ctx: commands.Context, target: discord.Member, *, reason=None):
+  async def unban(self, ctx: commands.Context, target: discord.User, *, reason=None):
     self.config(ban=True, is_un=True) # reconfiguring for an unban
     await self.action(ctx, target, "unban", reason)
   
@@ -36,7 +36,7 @@ class Ban(Base):
 
   @commands.slash_command(name="unban", description="unban a previously banned user")
   @commands.has_permissions(ban_members=True)
-  async def slash_unban(self, ctx: discord.ApplicationContext, target: discord.Member, reason: str | None = None):
+  async def slash_unban(self, ctx: discord.ApplicationContext, target: discord.User, reason: str | None = None):
     self.config(ban=True, is_un=True) # ditto (see unban())
     await self.action(ctx, target, "unban", reason) # ditto (see slash_ban())
 
