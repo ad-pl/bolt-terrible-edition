@@ -94,10 +94,6 @@ class Base(commands.Cog): # not actually a cog. it just inherits from commands.C
     
     if self.use_duration:
       seconds = utils.parse_duration(duration)
-
-      if seconds is None:
-        await utils.say(ctx, "You forgot to specify a duration. The default is 30 minutes.", is_slash=is_slash, ephemeral=True)
-        # no early return because this is just a warning
       
       if not seconds:
         await utils.say(ctx, "Invalid duration format. Try `3d`, `1h`, `30m`, `45s`", is_slash=is_slash, ephemeral=True)
