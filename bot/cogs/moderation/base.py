@@ -150,5 +150,5 @@ class Base(commands.Cog): # not actually a cog. it just inherits from commands.C
     
     console.log(f"{user} {self.verb_past} {target}{(' for ' + duration) if self.use_duration else ''} for: {reason}", "LOG")
 
-    success_message = f"{self.verb_past.capitalize()} {target}{(' for ' + duration) if self.use_duration else ''}. \nReason: {reason}"
+    success_message = f"{self.verb_past.capitalize()} {target.mention}{(' for ' + duration) if self.use_duration else ''}. \nReason: {reason}"
     await utils.say(ctx, success_message, is_slash=is_slash)
