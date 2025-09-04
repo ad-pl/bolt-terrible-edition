@@ -1,4 +1,9 @@
 # bot/cogs/moderation/base.py
+'''
+this one was desperate for docstrings before the others lol
+
+base class for moderation actions.
+'''
 
 # LIBRARIES AND MODULES
 
@@ -18,21 +23,40 @@ import bot.utils as utils
 # CLASSES
 
 class Base(commands.Cog): # not actually a cog. it just inherits from commands.Cog
+  '''
+  base class for moderation actions.
+
+  USAGE:
+  * create a new class that extends this one
+  * treat that new class as a regular cog.
+  * in the __init__() method of that class, call super().__init__(bot),
+    and then call self.config() with the appropriate configuration kwargs.
+  * then create your commands as normal, and inside them call self.action() with the correct arguments.
+  '''
+
   def __init__(self, bot):
     self.bot = bot
 
   def config(self, **kwargs):
-    """
-    was it a good idea to use **kwargs and not document WHAT those kwargs are?
-    probably not.
-    """
+    '''
+    <method>
+
+    configures the cog for a specific moderation action.
+    accepts the following boolean keyword args:
+    * timeout
+    * ban
+    * kick
+    * is_un
+    '''
   
     self.timeout = kwargs.get("timeout", False)
     self.ban = kwargs.get("ban", False)
     self.kick = kwargs.get("kick", False)
-
     self.is_un = kwargs.get("is_un", False) # genuinely one of the dumbest names for a variable ever but it works (i hope)
-    self.use_duration = True if (self.timeout) and (not self.is_un) else False # temporary bans haven't been added yet and will be pretty hard to add
+
+    self.use_duration = self.timeout and not self.is_un # temporary bans haven't been added yet and will be pretty hard to add
+
+    # TODO: refactor this area here to NOT use a billion if blocks
 
     if self.timeout:
       self.verb = "mute"
@@ -50,6 +74,15 @@ class Base(commands.Cog): # not actually a cog. it just inherits from commands.C
       return
   
   def check_for_permissions(self, perm, user, _perm_map):
+    '''
+    <method>
+    
+    checks if the user has the required permissions to perform the action.
+    perm should be a key in either perm_map or un_perm_map.
+
+    _perm_map refers to either perm_map or un_perm_map.
+    '''
+
     if not perm:
       return False # early return
     
@@ -62,6 +95,17 @@ class Base(commands.Cog): # not actually a cog. it just inherits from commands.C
     return False
 
   async def action(self, ctx, target, action_type, reason=None, duration="30m"):
+    '''
+    <method>
+    
+    the big one.
+    performs the action specified by action_type using the configuration set defined by self.config().
+    action_type can be one of the following strings:
+    * "ban"/"unban"
+    * "kick"
+    * "timeout"/"untimeout"
+    '''
+
     user = ctx.author
     reason = reason or "None provided."
 
