@@ -1,4 +1,11 @@
 # bot/constants/moderation.py
+'''
+permission mappings for moderation actions
+
+used by class Base in bot/cogs/moderation/base.py to check permissions
+'''
+
+# CONSTANTS
 
 perm_map = {
   "ban": "ban_members",

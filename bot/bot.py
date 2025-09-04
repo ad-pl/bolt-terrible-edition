@@ -1,5 +1,8 @@
 # bot/bot.py
-# TODO: add docstrings
+'''
+the bootstrapper for the bot
+this file creates the bot instance, loads cogs, and starts the bot.
+'''
 
 # LIBRARIES AND MODULES
 
@@ -30,11 +33,27 @@ bot = commands.Bot(command_prefix=constants.prefix, intents=intents, help_comman
 
 @bot.event
 async def on_ready():
+  '''
+  event that runs when the bot connects to discord.
+  '''
+
   setattr(bot, "start_time", time.time())
   console.log(f"Bolt is online as {bot.user}", "LOG")
 
 @bot.event
 async def on_command_error(ctx, error):
+  '''
+  runs on every command error.
+
+  currently only handles CommandNotFound errors because the cogs should have their own error handling.
+
+  KNOWN BUG:
+  - if you type something like "..." then the bot will assume that
+    ".." is a command and will throw a CommandNotFound error.
+    why is this? because of our choice of default prefix. uhhh...
+    sorry?
+  '''
+
   if isinstance(error, commands.CommandNotFound):
     console.log(str(error), "ERROR")
     await utils.say(ctx, f"Command not found. \nRun {constants.prefix}help to see all available commands.") # is_slash is False by default
@@ -42,6 +61,13 @@ async def on_command_error(ctx, error):
 ## START UP
 
 def load_cogs():
+  '''
+  loads all cogs defined in constants.extensions.
+  raises an exception if any cog fails to load.
+
+  any cog that isn't in constants.extensions will NOT be loaded, so dont forget to update the tuple when adding or removing cogs.
+  '''
+
   for ext in constants.extensions:
     try:
       bot.load_extension(ext)
@@ -52,5 +78,9 @@ def load_cogs():
       raise
 
 def start_bot():
+  '''
+  okay dude does this seriously need a docstring
+  '''
+
   load_cogs()
   bot.run(token)

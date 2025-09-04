@@ -1,4 +1,10 @@
 # bot/constants/config.py
+'''
+loaded by utils.py
+
+not really sure why this file is called "config" but eh
+if it aint broke dont fix it
+'''
 
 # LIBRARIES AND MODULES
 
