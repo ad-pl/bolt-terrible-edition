@@ -8,6 +8,9 @@ this file creates the bot instance, loads cogs, and starts the bot.
 # LIBRARIES AND MODULES
 
 import time
+import threading
+import asyncio
+import sys
 
 ## pycord
 
@@ -32,6 +35,44 @@ bot = commands.Bot(command_prefix=constants.prefix, intents=intents, help_comman
 
 # FUNCTIONS
 
+def start_console():
+  '''
+  starts the bot console.
+  '''
+
+  def console_loop():
+    '''
+    basically
+    bolt's version of a REPL
+    except not really its more of a CLI
+    '''
+
+    while True:
+      try:
+        cmd = input("% ")
+        cmd = cmd.lower().strip()
+        match cmd:
+          case ("exit" | "quit" | "shutdown"):
+            console.log("Shutting down...")
+            asyncio.run_coroutine_threadsafe(bot.close(), bot.loop)
+            sys.exit(0)
+
+          case ("reload" | "restart"):
+            console.log("Reloading cogs...", "LOG")
+            load_cogs(reload=True, reraise=False)
+            console.log("Done.", "LOG")
+
+          case _:
+            console.log(f"Unknown command: {cmd}")
+
+      except Exception as e:
+        console.log(f"exception caught in console loop: {e}", "ERROR")
+        continue
+
+  threading.Thread(target=console_loop, daemon=True).start()
+
+## EVENTS
+
 @bot.event
 async def on_ready():
   '''
@@ -40,6 +81,7 @@ async def on_ready():
 
   setattr(bot, "start_time", time.time())
   console.log(f"Bolt is online as {bot.user}", "LOG")
+  start_console()
 
 @bot.event
 async def on_command_error(ctx, error):
