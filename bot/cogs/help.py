@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # bot/cogs/help.py
 '''
 handles the help commands

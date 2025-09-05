@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # bot/cogs/invite.py
 '''
 handles the invite commands

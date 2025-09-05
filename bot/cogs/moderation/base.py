@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # bot/cogs/moderation/base.py
 '''
 this one was desperate for docstrings before the others lol

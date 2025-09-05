@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # bot/cogs/ping.py
 '''
 handles the ping and uptime commands

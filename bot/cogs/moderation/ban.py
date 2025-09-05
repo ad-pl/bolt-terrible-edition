@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # bot/cogs/moderation/ban.py
 
 # LIBRARIES AND MODULES

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # bot/cogs/moderation/timeout.py
 
 # LIBRARIES AND MODULES

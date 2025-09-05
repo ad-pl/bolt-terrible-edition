@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # bot/constants/config.py
 '''
 loaded by utils.py

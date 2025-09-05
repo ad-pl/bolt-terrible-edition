@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # bot/cogs/echo.py
 '''
 handles the echo commands

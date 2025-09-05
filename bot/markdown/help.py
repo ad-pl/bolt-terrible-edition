@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # bot/constants/help_md.py
 '''
 paired with bot/markdown/help.md
