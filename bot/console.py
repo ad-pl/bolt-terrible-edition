@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # bot/console.py
 '''
 it just logs things.

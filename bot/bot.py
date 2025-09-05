@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # bot/bot.py
 '''
 the bootstrapper for the bot

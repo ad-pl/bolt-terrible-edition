@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # bot/utils.py
 '''
 common utilities used throughout the bot's codebase
