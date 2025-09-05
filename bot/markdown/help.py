@@ -20,6 +20,6 @@ _repo_link = "https://github.com/sparkhere-sys/bolt"
 find_and_replace = {
   # "find": "replace"
   "{prefix}": prefix,
-  "{support}": f"<{{_support}}>",
+  "{support}": f"<{_support}>",
   "{repo}": f"Bolt is open source! You can find the code at <{_repo_link}>",
 }
