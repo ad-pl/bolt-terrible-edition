@@ -61,7 +61,7 @@ async def on_command_error(ctx, error):
 
 ## START UP
 
-def load_cogs():
+def load_cogs(reload=False, reraise=True):
   '''
   loads all cogs defined in constants.extensions.
   raises an exception if any cog fails to load.
@@ -71,12 +71,18 @@ def load_cogs():
 
   for ext in constants.extensions:
     try:
+      if reload:
+        bot.reload_extension(ext)
+        console.log(f"Reloaded extension: {ext}", "DEBUG")
+        continue
+
       bot.load_extension(ext)
       console.log(f"Loaded extension: {ext}", "DEBUG")
     except Exception as e:
       console.log(f"Failed to load extension: {ext}", "DEBUG")
       console.log(f"Exception: {e}", "DEBUG")
-      raise
+      if reraise:
+        raise
 
 def start_bot():
   '''
