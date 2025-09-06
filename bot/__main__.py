@@ -10,6 +10,12 @@ recommended to use this file instead of running bot.start_bot() directly
 # SAFEGUARDS
 
 def dir_safeguard():
+  '''
+  simple check to see if you're running the bot from the repo root.
+  NOTE: because the safeguard only runs in this file, people can easily just run `bot.start_bot()` directly
+        and see the effects of running bolt outside the root. (spoiler: it will crash.)
+  '''
+
   from pathlib import Path
 
   cwd = Path.cwd()
@@ -29,9 +35,13 @@ import bot.console as console
 # FUNCTIONS
 
 def main():
-  try:
-    dir_safeguard()
+  '''
+  le bootstrapper
+  '''
 
+  dir_safeguard()
+  
+  try:
     console.log("Starting Bolt...", "LOG")
 
     if not allow_colors:
