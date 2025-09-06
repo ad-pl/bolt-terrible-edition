@@ -1,4 +1,9 @@
+#!/usr/bin/env python3
 # bot/constants/base.py
+'''
+the base constant file that is required for the bot to boot.
+contains the bot prefix and the extensions to load.
+'''
 
 # LIBRARIES AND MODULES
 

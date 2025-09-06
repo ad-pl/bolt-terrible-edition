@@ -1,5 +1,8 @@
+#!/usr/bin/env python3
 # bot/cogs/ping.py
-# TODO: add docstrings
+'''
+handles the ping and uptime commands
+'''
 
 # LIBRARIES AND MODULES
 
@@ -18,10 +21,20 @@ import bot.utils as utils
 # CLASSES
 
 class Ping(commands.Cog):
+  '''
+  handles the ping and uptime commands
+  '''
+
   def __init__(self, bot):
     self.bot = bot
   
   async def _ping(self, ctx):
+    '''
+    <_command>
+
+    pings the bot and says the latency in ms in the channel the command was run in.
+    '''
+
     user = ctx.author
     is_slash = isinstance(ctx, discord.ApplicationContext)
 
@@ -34,6 +47,13 @@ class Ping(commands.Cog):
     await utils.say(ctx, message, is_slash=is_slash)
   
   async def _uptime(self, ctx):
+    '''
+    <_command>
+
+    gets the bot's start_time attribute and calculates the uptime,
+    then sends it in the channel the command was invoked in.
+    '''
+
     user = ctx.author
     is_slash = isinstance(ctx, discord.ApplicationContext)
 
@@ -55,6 +75,8 @@ class Ping(commands.Cog):
     console.log(message, "INFO")
     await utils.say(ctx, message, is_slash=is_slash)
 
+  # COMMANDS
+
   @commands.command()
   async def ping(self, ctx: commands.Context):
     await self._ping(ctx)
@@ -74,4 +96,8 @@ class Ping(commands.Cog):
 # FUNCTIONS
 
 def setup(bot):
+  '''
+  adds Ping cog to the bot
+  '''
+
   bot.add_cog(Ping(bot))

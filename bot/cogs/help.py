@@ -1,5 +1,8 @@
+#!/usr/bin/env python3
 # bot/cogs/help.py
-# TODO: add docstrings
+'''
+handles the help commands
+'''
 
 # LIBRARIES AND MODULES
 
@@ -11,26 +14,42 @@ from discord.ext import commands
 ## pypkg
 
 import bot.console as console
-import bot.constants.help_md as help_md
+import bot.markdown.help as help
 ## from bot.constants.base import prefix
 import bot.utils as utils
 
 # CLASSES
 
 class Help(commands.Cog):
+  '''
+  handles the help commands
+  '''
+
   def __init__(self, bot):
     self.bot = bot
 
   def fetch_help(self):
-    with open(help_md.help_md, "r", encoding="utf-8") as f:
+    '''
+    <method>
+
+    fetches the help markdown file, finds and replaces constants, then returns the final string.
+    '''
+
+    with open(help.help_md, "r", encoding="utf-8") as f:
       help_data = f.read()
     
-    for find, replace in help_md.find_and_replace.items():
+    for find, replace in help.find_and_replace.items():
       help_data = help_data.replace(find, replace)
     
     return help_data
 
   async def _help(self, ctx):
+    '''
+    <_command>
+
+    sends the help message in the channel the command was invoked in.
+    '''
+
     user = ctx.author
     is_slash = isinstance(ctx, discord.ApplicationContext)
 
@@ -39,6 +58,8 @@ class Help(commands.Cog):
     message = self.fetch_help()
     
     await utils.say(ctx, message, is_slash=is_slash)
+
+  # COMMANDS
 
   # prefix command
   @commands.command()
@@ -53,4 +74,8 @@ class Help(commands.Cog):
 # FUNCTIONS
 
 def setup(bot):
+  '''
+  adds Help cog to the bot
+  '''
+
   bot.add_cog(Help(bot))

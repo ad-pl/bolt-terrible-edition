@@ -1,4 +1,12 @@
+#!/usr/bin/env python3
 # bot/utils.py
+'''
+common utilities used throughout the bot's codebase
+
+essentially,
+just a group of functions that don't belong anywhere else,
+because DRY.
+'''
 
 # LIBRARIES AND MODULES
 
@@ -19,6 +27,11 @@ from bot.constants.config import env_path, units
 # FUNCTIONS
 
 def get_env_var(var: str, default: Any, required=True, from_dot_env=True):
+  '''
+  literally does what it says on the tin
+  why does this need a docstring
+  '''
+  
   if from_dot_env:
     if not env_path.exists():
       console.log(f"No .env file found.", "WARN" if not required else "FATAL")
@@ -37,7 +50,16 @@ def get_env_var(var: str, default: Any, required=True, from_dot_env=True):
     
   return val
 
-def parse_duration(duration: str) -> int | bool | None: # the type annotations are insane on this one
+def parse_duration(duration: str): # the return type annotations are gone now. screw you.
+  '''
+  parses a value like "1h30m" into seconds.
+  returns None if the duration is empty (or 0)
+  and returns False if the duration is invalid.
+
+  we're NOT using regex for this.
+  spark says "regex makes me have an aneurysm."
+  '''
+
   duration = duration.strip().lower()
 
   if not duration:
@@ -59,13 +81,20 @@ def parse_duration(duration: str) -> int | bool | None: # the type annotations a
   return total_seconds if total_seconds > 0 else False
 
 async def say(ctx: discord.ApplicationContext | commands.Context, msg: str, is_slash=False, ephemeral=False):
+  '''
+  a wrapper around ctx.send() and ctx.respond().
+  TODO: make is_slash detection smarter
+  '''
+
   if is_slash and isinstance(ctx, discord.ApplicationContext): # just in case
     await ctx.respond(msg, ephemeral=ephemeral)
   else:
     await ctx.send(msg)
 
 async def assert_guild(ctx, guild, user, is_slash=False):
-  # TODO: rewrite this
+  # TODO: rewrite this. it sucks. its bad. it barely even works.
+  #       im not gonna bother writing a docstring for this.
+  
   if guild is None:
     console.log(f"{user} tried to run a command where it's not supported.", "LOG")
     await say(ctx, "You can't run that command here!", is_slash=is_slash, ephemeral=True)

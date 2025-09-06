@@ -1,4 +1,8 @@
+#!/usr/bin/env python3
 # bot/cogs/echo.py
+'''
+handles the echo commands
+'''
 
 # LIBRARIES AND MODULES
 
@@ -15,10 +19,20 @@ import bot.utils as utils
 # CLASSES
 
 class Echo(commands.Cog):
+  '''
+  handles the echo commands
+  '''
+
   def __init__(self, bot):
     self.bot = bot
   
   async def _echo(self, ctx, msg=None):
+    '''
+    <_command>
+
+    says a message provided by the user in the channel the command was invoked in.
+    '''
+
     user = ctx.author
     is_slash = isinstance(ctx, discord.ApplicationContext)
 
@@ -32,6 +46,8 @@ class Echo(commands.Cog):
     console.log(f"To be echoed: {msg}", "INFO")
     await utils.say(ctx, msg, is_slash=is_slash)
   
+  # COMMANDS
+
   # prefix command
   @commands.command()
   async def echo(self, ctx: commands.Context, *, msg=None):
@@ -46,4 +62,8 @@ class Echo(commands.Cog):
 # FUNCTIONS
 
 def setup(bot):
+  '''
+  adds Echo cog to the bot
+  '''
+
   bot.add_cog(Echo(bot))

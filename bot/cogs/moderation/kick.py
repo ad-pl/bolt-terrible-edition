@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # bot/cogs/moderation/kick.py
 
 # LIBRARIES AND MODULES

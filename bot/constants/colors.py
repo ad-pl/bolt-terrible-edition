@@ -1,4 +1,8 @@
+#!/usr/bin/env python3
 # bot/constants/colors.py
+'''
+used by console.py to color log output
+'''
 
 # LIBRARIES AND MODULES
 
