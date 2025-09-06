@@ -5,11 +5,6 @@
 main entry point
 
 recommended to use this file instead of running bot.start_bot() directly
-
-KNOWN BUG:
-- if you run this OUTSIDE of the repository root, (the parent directory of bot/)
-  bolt will trip up on the paths because i never added any safeguards for that and never will,
-  and you'll get FileNotFoundErrors.
 '''
 
 # SAFEGUARDS
