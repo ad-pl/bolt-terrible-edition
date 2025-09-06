@@ -59,9 +59,11 @@ to start the bot.
 > [!WARNING]
 > **Always run the bot from the repo root.**
 >
-> Running it from anywhere else will cause Bolt's code to trip over and not find the `.env` file,
+> Running it from anywhere else would cause Bolt's code to trip over and not find the `.env` file,
 >
-> so Bolt will just end up crashing at boot.
+> so Bolt would just end up crashing at boot.
+>
+> Bolt does have a built-in safeguard for this; if you see any `RuntimeError`s, this is why.
 
 # uhhh bye
 
