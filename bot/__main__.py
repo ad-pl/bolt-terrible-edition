@@ -12,6 +12,17 @@ KNOWN BUG:
   and you'll get FileNotFoundErrors.
 '''
 
+# SAFEGUARDS
+
+def dir_safeguard():
+  from pathlib import Path
+
+  cwd = Path.cwd()
+  root = Path(__file__).resolve().parent.parent # in other words, the parent directory of the directory that __file__ is in
+
+  if cwd != root:
+    raise RuntimeError(f"Never run Bolt from outside this directory: {root}\nYou're in the {cwd} directory.")
+
 # LIBRARIES AND MODULES
 
 ## pypkg
@@ -24,6 +35,8 @@ import bot.console as console
 
 def main():
   try:
+    dir_safeguard()
+
     console.log("Starting Bolt...", "LOG")
 
     if not allow_colors:
