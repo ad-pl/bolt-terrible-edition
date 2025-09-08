@@ -14,6 +14,7 @@ not sure what else to say.
 # LIBRARIES AND MODULES
 
 import time # TODO: replace with datetime
+
 # NOTE: yes we are not using logging
 #       we are literally just printing to stdout
 #       there is no need to make things more complicated
@@ -23,6 +24,7 @@ import time # TODO: replace with datetime
 
 ## from bot.constants import *
 import bot.constants.colors as colors
+import bot.constants.config as config
 
 # FUNCTIONS
 
@@ -31,7 +33,13 @@ def log(msg, level="LOG", after_console_start=True):
   print wrapper that does the hard logging stuff for us.
   '''
 
-  print(f"{colors.log_colors[level.upper()]}[{level.upper()}]{colors.reset_colors} [{time.asctime(time.gmtime())}] {msg}")
+  level = level.upper()
+
+  level_str = f"{colors.log_colors.get(level, '')}[{level}]{colors.reset_colors}"
+  time_str = f"[{time.asctime(time.gmtime())}]" # not local time because timezones are annoying
+
+  print(f"{level_str} {time_str} {msg}")
+
   if not after_console_start:
-    print("% ", end="", flush=True) # reprint the prompt created by the console loop in bot.py  
+    print(config.prompt, end="", flush=True) # reprint the prompt created by the console loop in bot.py  
   

@@ -22,6 +22,7 @@ from discord.ext import commands
 import bot.constants.base as constants
 import bot.console as console
 import bot.utils as utils
+import bot.constants.config as config
 
 # INIT
 
@@ -49,7 +50,7 @@ def start_console():
 
     while True:
       try:
-        cmd = input("% ")
+        cmd = input(config.prompt)
         cmd = cmd.lower().strip()
         match cmd:
           case ("exit" | "quit" | "shutdown"):
