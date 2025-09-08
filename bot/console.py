@@ -28,7 +28,7 @@ import bot.constants.config as config
 
 # FUNCTIONS
 
-def log(msg, level="LOG", after_console_start=True):
+def log(msg, level="LOG", after_console_start=False):
   '''
   print wrapper that does the hard logging stuff for us.
   '''
