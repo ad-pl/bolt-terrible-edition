@@ -1,4 +1,11 @@
-# Bolt
+# <p align=center> Bolt </p>
+
+<p align=center>
+  <img alt="Open Issues" src="https://img.shields.io/github/issues/sparkhere-sys/bolt?style=for-the-badge&logo=github&logoColor=white&color=%23f38ba8">
+  <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues-pr/sparkhere-sys/bolt?style=for-the-badge&logo=git&logoColor=white&color=%23a6e3a1">
+</p>
+
+---
 
 > This is where she writes a description.
 
@@ -32,7 +39,7 @@ if you're feeling lazy, just run:
 pip install -r requirements.txt
 ```
 
-___
+---
 
 ### Instructions
 
@@ -56,14 +63,10 @@ python -m bot
 ```
 to start the bot.
 
-> [!WARNING]
-> **Always run the bot from the repo root.**
+> [!NOTE]
+> If the bot isn't run from the repo root,
 >
-> Running it from anywhere else would cause Bolt's code to trip over and not find the `.env` file,
->
-> so Bolt would just end up crashing at boot.
->
-> Bolt does have a built-in safeguard for this; if you see any `RuntimeError`s, this is why.
+> then it'll just trip over on all the paths and break.
 
 # uhhh bye
 
@@ -74,7 +77,7 @@ contact me:
 * [my email](mailto:spark-aur@proton.me)
 * my discord: `spark_sys`
 
-___
+---
 
 <p align=center>
   <img alt="License: Apache 2.0" src="https://img.shields.io/github/license/sparkhere-sys/bolt?style=for-the-badge&logo=apache&logoColor=black&label=license&labelColor=white&color=%2374c7ec&link=https%3A%2F%2Fgithub.com%2Fsparkhere-sys%2Fbolt%2Fblob%2Fmain%2FLICENSE">
