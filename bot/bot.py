@@ -81,7 +81,7 @@ async def on_ready():
   '''
 
   setattr(bot, "start_time", time.time())
-  console.log(f"Bolt is online as {bot.user}", "LOG", after_console_start=False)
+  console.log(f"Bolt is online as {bot.user}", "LOG", after_console_start=True)
   start_console()
 
 @bot.event
