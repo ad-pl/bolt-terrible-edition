@@ -39,7 +39,7 @@ def log(msg, level="LOG", after_console_start=False):
   time_str = f"[{time.asctime(time.gmtime())}]" # not local time because timezones are annoying
   full = f"{level_str} {time_str} {msg}"
 
-  if after_console_start:
+  if not after_console_start:
     print(full)
     return
   
