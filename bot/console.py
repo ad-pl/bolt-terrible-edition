@@ -37,9 +37,13 @@ def log(msg, level="LOG", after_console_start=False):
 
   level_str = f"{colors.log_colors.get(level, '')}[{level}]{colors.reset_colors}"
   time_str = f"[{time.asctime(time.gmtime())}]" # not local time because timezones are annoying
+  full = f"{level_str} {time_str} {msg}"
 
-  print(f"{level_str} {time_str} {msg}")
+  if after_console_start:
+    print(full)
+    return
 
-  if not after_console_start:
-    print(config.prompt, end="", flush=True) # reprint the prompt created by the console loop in bot.py  
+  print("\r", end="") # my first time ever using CR for stuff like this
+  print(full)
+  print(config.prompt, end="", flush=True) # reprint the prompt created by the console loop in bot.py
   
