@@ -42,8 +42,8 @@ def log(msg, level="LOG", after_console_start=False):
   if after_console_start:
     print(full)
     return
-
-  print("\r", end="") # my first time ever using CR for stuff like this
+  
   print(full)
+  print("\r", end="") # my first time ever using CR for stuff like this
   print(config.prompt, end="", flush=True) # reprint the prompt created by the console loop in bot.py
   
