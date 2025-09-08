@@ -34,17 +34,16 @@ class Echo(commands.Cog):
     '''
 
     user = ctx.author
-    is_slash = isinstance(ctx, discord.ApplicationContext)
 
     console.log(f"{user} requested an echo.", "LOG")
 
     if msg is None:
       console.log("There is nothing to echo, returning.", "INFO")
-      await utils.say(ctx, "There's nothing to echo.", is_slash=is_slash, ephemeral=True)
+      await utils.say(ctx, "There's nothing to echo.", ephemeral=True)
       return
     
     console.log(f"To be echoed: {msg}", "INFO")
-    await utils.say(ctx, msg, is_slash=is_slash)
+    await utils.say(ctx, msg)
   
   # COMMANDS
 

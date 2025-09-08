@@ -80,24 +80,25 @@ def parse_duration(duration: str): # the return type annotations are gone now. s
 
   return total_seconds if total_seconds > 0 else False
 
-async def say(ctx: discord.ApplicationContext | commands.Context, msg: str, is_slash=False, ephemeral=False):
+async def say(ctx: discord.ApplicationContext | commands.Context, msg: str, ephemeral=False):
   '''
   a wrapper around ctx.send() and ctx.respond().
-  TODO: make is_slash detection smarter
   '''
 
-  if is_slash and isinstance(ctx, discord.ApplicationContext): # just in case
+  is_slash = isinstance(ctx, discord.ApplicationContext)
+
+  if is_slash:
     await ctx.respond(msg, ephemeral=ephemeral)
   else:
     await ctx.send(msg)
 
-async def assert_guild(ctx, guild, user, is_slash=False):
+async def assert_guild(ctx, guild, user):
   # TODO: rewrite this. it sucks. its bad. it barely even works.
   #       im not gonna bother writing a docstring for this.
   
   if guild is None:
     console.log(f"{user} tried to run a command where it's not supported.", "LOG")
-    await say(ctx, "You can't run that command here!", is_slash=is_slash, ephemeral=True)
+    await say(ctx, "You can't run that command here!", ephemeral=True)
     return False
   
   return True

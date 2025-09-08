@@ -51,13 +51,12 @@ class Help(commands.Cog):
     '''
 
     user = ctx.author
-    is_slash = isinstance(ctx, discord.ApplicationContext)
 
     console.log(f"Help requested by {user} ({user.id})", "LOG")
 
     message = self.fetch_help()
     
-    await utils.say(ctx, message, is_slash=is_slash)
+    await utils.say(ctx, message)
 
   # COMMANDS
 
