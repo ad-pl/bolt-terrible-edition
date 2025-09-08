@@ -36,7 +36,6 @@ class Ping(commands.Cog):
     '''
 
     user = ctx.author
-    is_slash = isinstance(ctx, discord.ApplicationContext)
 
     latency = round(self.bot.latency * 1000)
 
@@ -44,7 +43,7 @@ class Ping(commands.Cog):
     console.log(f"Latency: {latency}ms", "INFO")
 
     message = f"Pong! \n{latency}ms"
-    await utils.say(ctx, message, is_slash=is_slash)
+    await utils.say(ctx, message)
   
   async def _uptime(self, ctx):
     '''
@@ -55,13 +54,12 @@ class Ping(commands.Cog):
     '''
 
     user = ctx.author
-    is_slash = isinstance(ctx, discord.ApplicationContext)
 
     console.log(f"Uptime requested by {user} ({user.id})", "LOG")
 
     if not hasattr(self.bot, "start_time"):
       console.log(f"Somehow, the bot doesn't have a start time.", "DEBUG")
-      await utils.say(ctx, "Dude. The bot doesn't even have uptime yet.", is_slash=is_slash, ephemeral=True)
+      await utils.say(ctx, "Dude. The bot doesn't even have uptime yet.", ephemeral=True)
       return
     
     delta = int(time.time() - self.bot.start_time)
@@ -73,7 +71,7 @@ class Ping(commands.Cog):
     message = f"Uptime: {days}d {hours}h {minutes}m {seconds}s"
 
     console.log(message, "INFO")
-    await utils.say(ctx, message, is_slash=is_slash)
+    await utils.say(ctx, message)
 
   # COMMANDS
 

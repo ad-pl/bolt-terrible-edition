@@ -34,7 +34,6 @@ class Invite(commands.Cog):
     '''
 
     user = ctx.author
-    is_slash = isinstance(ctx, discord.ApplicationContext)
 
     # TODO: put this in a markdown file
     message = """
@@ -46,7 +45,7 @@ https://discord.gg/hF6mgCE3gT
     """
 
     console.log(f"{user} requested an invite link.", "LOG")
-    await utils.say(ctx, message, is_slash=is_slash)
+    await utils.say(ctx, message)
   
   # COMMANDS
 
