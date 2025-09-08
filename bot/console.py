@@ -26,12 +26,12 @@ import bot.constants.colors as colors
 
 # FUNCTIONS
 
-def log(msg, level="LOG"):
+def log(msg, level="LOG", after_console_start=True):
   '''
   print wrapper that does the hard logging stuff for us.
   '''
 
   print(f"{colors.log_colors[level.upper()]}[{level.upper()}]{colors.reset_colors} [{time.asctime(time.gmtime())}] {msg}")
-  # in plain english,
-  # it just outputs:
-  # [LOG] [current time] [message]
+  if not after_console_start:
+    print("% ", end="", flush=True) # reprint the prompt created by the console loop in bot.py  
+  
