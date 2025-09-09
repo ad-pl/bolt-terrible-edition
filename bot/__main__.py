@@ -42,18 +42,18 @@ def main():
   dir_safeguard()
   
   try:
-    console.log("Starting Bolt...", "LOG", after_console_start=True)
+    console.log("Starting Bolt...", "LOG", before_console_start=True)
 
     if not allow_colors:
-      console.log("You don't have `colorama` installed. If you want colored logs, run `pip install colorama`.", "WARN", after_console_start=True)
+      console.log("You don't have `colorama` installed. If you want colored logs, run `pip install colorama`.", "WARN", before_console_start=True)
 
     bot.start_bot()
 
   except Exception as e:
-    console.log(f"Something happened. exception: {e}", "FATAL", after_console_start=True)
+    console.log(f"Something happened. exception: {e}", "FATAL", before_console_start=True)
 
   except KeyboardInterrupt:
-    console.log(f"Bolt shutting down...", "LOG", after_console_start=True)
+    console.log(f"Bolt shutting down...", "LOG", before_console_start=True)
 
 # START UP
 

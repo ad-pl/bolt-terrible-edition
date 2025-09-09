@@ -81,7 +81,7 @@ async def on_ready():
   '''
 
   setattr(bot, "start_time", time.time())
-  console.log(f"Bolt is online as {bot.user}", "LOG", after_console_start=True)
+  console.log(f"Bolt is online as {bot.user}", "LOG", before_console_start=True)
   start_console()
 
 @bot.event
@@ -99,7 +99,7 @@ async def on_command_error(ctx, error):
   '''
 
   if isinstance(error, commands.CommandNotFound):
-    console.log(str(error), "ERROR") # after_console_start is irrelevant here
+    console.log(str(error), "ERROR") # before_console_start is irrelevant here
     await utils.say(ctx, f"Command not found. \nRun {constants.prefix}help to see all available commands.") # is_slash is False by default
 
 ## START UP
@@ -116,11 +116,11 @@ def load_cogs(reload=False, reraise=True):
     try:
       if reload:
         bot.reload_extension(ext)
-        console.log(f"Reloaded extension: {ext}", "DEBUG") # after_console_start is irrelevant here, the console should be started when this function is called with reload=True
+        console.log(f"Reloaded extension: {ext}", "DEBUG") # before_console_start is irrelevant here, the console should be started when this function is called with reload=True
         continue
 
       bot.load_extension(ext)
-      console.log(f"Loaded extension: {ext}", "DEBUG", after_console_start=True)
+      console.log(f"Loaded extension: {ext}", "DEBUG", before_console_start=True)
     except Exception as e:
       console.log(f"Failed to load extension: {ext}", "DEBUG")
       console.log(f"Exception: {e}", "DEBUG")
