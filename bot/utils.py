@@ -26,7 +26,7 @@ from bot.constants.config import env_path, units
 
 # FUNCTIONS
 
-def get_env_var(var: str, default: Any = None, required=True, from_dot_env=True):
+def get_env_var(var: str, default: Any, required=True, from_dot_env=True):
   '''
   literally does what it says on the tin
   why does this need a docstring
