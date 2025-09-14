@@ -1,0 +1,55 @@
+# copy and paste this to your own config.toml,
+# then edit as needed.
+
+# CONFIGURATION
+
+[base]
+
+# NOTE: token is set in the .env file, not here.
+prefix = "."
+owner_id = "YOUR_DISCORD_ID_HERE"
+
+[settings]
+
+use_sql = true
+console_prompt = "% "
+
+[commands]
+[[commands.echo]]
+
+enabled = true
+allow_links = true
+
+[[commands.help]]
+
+enabled = true
+repo_link = "https://your/repo/here"
+support_link = "https://discord.gg/yourserverhere"
+
+[[commands.invite]]
+
+enabled = true
+guild_only = false
+
+[[commands.ping]]
+
+enabled = true
+
+[[commands.uptime]]
+
+enabled = true
+
+[[commands.ban]]
+
+enabled = true
+unban_enabled = true
+
+[[commands.kick]]
+
+enabled = true
+
+[[commands.mute]]
+
+enabled = true
+unmute_enabled = true
+default_duration = 30 # in minutes
