@@ -31,7 +31,7 @@ Or you know, just, add the bot to your server. Feel free.
 * Python 3.10+ because we used `match-case` and not a ton of `if-elif-else`s
 * [`py-cord`](https://pypi.org/project/py-cord/) (`pip install py-cord`)
 * [`python-dotenv`](https://pypi.org/project/python-dotenv/) (`pip install python-dotenv`)
-* If using Python 3.13, also install [`audioop-lts`](https://pypi.org/project/audioop-lts)
+* If using Python 3.13, also install [`audioop-lts`](https://pypi.org/project/audioop-lts) (pycord apparently insists on using it even without using audio features. thanks, pycord.)
 * Optional: [`colorama`](https://pypi.org/project/colorama) so your logs look :sparkles:pretty:sparkles:
 
 if you're feeling lazy, just run:
