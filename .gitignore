@@ -209,3 +209,6 @@ __marimo__/
 # special
 
 *.ignored
+data/
+logs/
+config.toml
