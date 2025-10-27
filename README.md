@@ -23,8 +23,8 @@ Or just add the bot to your server. Feel free.
 
 ### Prerequisites
 
-* an operating system (duh)
-* A Discord bot (go to https://discord.dev)
+* A python implementation (CPython (recommended), PyPy)
+* A Discord bot token (go to https://discord.dev)
 
 #### Python dependencies
 
@@ -34,11 +34,6 @@ Or just add the bot to your server. Feel free.
 * If using Python 3.13, also install [`audioop-lts`](https://pypi.org/project/audioop-lts) (pycord apparently insists on using it even without using audio features. thanks, pycord.)
 * Optional: [`colorama`](https://pypi.org/project/colorama) so your logs look :sparkles:pretty:sparkles:
 
-if you're feeling lazy, just run:
-```bash
-pip install -r requirements.txt
-```
-
 ---
 
 ### Instructions
@@ -46,8 +41,26 @@ pip install -r requirements.txt
 First, clone the repo:
 
 ```bash
-git clone https://github.com/sparkhere-sys/bolt.git
-cd bolt
+git clone https://github.com/sparkhere-sys/bolt.git && cd bolt
+```
+
+Set up a virtual environment:
+
+On *nix:
+
+```bash
+python3 -m venv venv && source ./venv/bin/activate
+```
+
+On windows:
+
+```powershell
+python3 -m venv venv && .\venv\Scripts\Activate.ps1
+```
+
+Now you can install the packages:
+```bash
+pip install -r requirements.txt
 ```
 
 Then, create a `.env` file containing your bot's token and the prefix you want to use:
