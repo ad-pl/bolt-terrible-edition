@@ -9,17 +9,17 @@
 
 > This is where she writes a description.
 
-Bolt is a Discord bot!
+Bolt is a (heavily WIP) general purpose Discord bot!
 
 join the support (and also testing) server: https://discord.gg/hF6mgCE3gT
 
-invite bolt to your server: https://sparkhere-sys.github.io/bolt
+invite Bolt to your server: https://sparkhere-sys.github.io/bolt
 
 ## Installation
 
 Follow these instructions if you want to self-host the bot.
 
-Or you know, just, add the bot to your server. Feel free.
+Or just add the bot to your server. Feel free.
 
 ### Prerequisites
 
@@ -62,11 +62,6 @@ Once all of that is done, run:
 python -m bot
 ```
 to start the bot.
-
-> [!NOTE]
-> If the bot isn't run from the repo root,
->
-> then it'll just trip over on all the paths and break.
 
 # uhhh bye
 
