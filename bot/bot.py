@@ -8,8 +8,6 @@ this file creates the bot instance, loads cogs, and starts the bot.
 # LIBRARIES AND MODULES
 
 import time
-import threading
-import asyncio
 import sys
 
 ## pycord
@@ -26,51 +24,15 @@ import bot.constants.config as config
 
 # INIT
 
-token = utils.get_env_var("TOKEN", default=None, required=True, from_dot_env=True) # get token
+token = utils.get_env_var("TOKEN", default=None, required=True, from_dot_env=True)
 
 intents = discord.Intents.default()
 intents.message_content = True
-# if reaction roles will be added to the bot, then intents.reactions = True
+## intents.reactions = True
 
 bot = commands.Bot(command_prefix=constants.prefix, intents=intents, help_command=None) # create bot instance, remove built-in help command
 
 # FUNCTIONS
-
-def start_console():
-  '''
-  starts the bot console.
-  '''
-
-  def console_loop():
-    '''
-    basically
-    bolt's version of a REPL
-    except not really its more of a CLI
-    '''
-
-    while True:
-      try:
-        cmd = input(config.prompt)
-        cmd = cmd.lower().strip()
-        match cmd:
-          case ("exit" | "quit" | "shutdown"):
-            console.log("Shutting down...")
-            asyncio.run_coroutine_threadsafe(bot.close(), bot.loop)
-            sys.exit(0)
-
-          case ("reload" | "restart"):
-            console.log("Reloading cogs...", "LOG")
-            load_cogs(reload=True, reraise=False)
-            console.log("Done.", "LOG")
-
-          case _:
-            console.log(f"Unknown command: {cmd}")
-
-      except Exception as e:
-        console.log(f"exception caught in console loop: {e}", "ERROR")
-        continue
-
-  threading.Thread(target=console_loop, daemon=True).start()
 
 ## EVENTS
 
@@ -81,8 +43,7 @@ async def on_ready():
   '''
 
   setattr(bot, "start_time", time.time())
-  console.log(f"Bolt is online as {bot.user}", "LOG", before_console_start=True)
-  start_console()
+  console.log(f"Bolt is online as {bot.user}", "LOG")
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -116,11 +77,10 @@ def load_cogs(reload=False, reraise=True):
     try:
       if reload:
         bot.reload_extension(ext)
-        console.log(f"Reloaded extension: {ext}", "DEBUG") # before_console_start is irrelevant here, the console should be started when this function is called with reload=True
-        continue
+        console.log(f"Reloaded extension: {ext}", "DEBUG")
 
       bot.load_extension(ext)
-      console.log(f"Loaded extension: {ext}", "DEBUG", before_console_start=True)
+      console.log(f"Loaded extension: {ext}", "DEBUG")
     except Exception as e:
       console.log(f"Failed to load extension: {ext}", "DEBUG")
       console.log(f"Exception: {e}", "DEBUG")
