@@ -52,7 +52,7 @@ On *nix:
 python3 -m venv venv && source ./venv/bin/activate
 ```
 
-On windows:
+On Windows:
 
 ```powershell
 python3 -m venv venv && .\venv\Scripts\Activate.ps1
