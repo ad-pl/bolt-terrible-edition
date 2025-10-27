@@ -24,7 +24,6 @@ import time # TODO: replace with datetime
 
 ## from bot.constants import *
 import bot.constants.colors as colors
-import bot.constants.config as config
 
 # FUNCTIONS
 
