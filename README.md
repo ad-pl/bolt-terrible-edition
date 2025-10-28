@@ -23,7 +23,9 @@ Or just add the bot to your server. Feel free.
 
 ### Prerequisites
 
-* A python implementation (CPython (recommended), PyPy)
+* Any OS that can run Python
+* Python itself (duh)
+  * recommended to use CPython, however PyPy works too
 * A Discord bot token (go to https://discord.dev)
 
 #### Python dependencies
@@ -44,23 +46,24 @@ First, clone the repo:
 git clone https://github.com/sparkhere-sys/bolt.git && cd bolt
 ```
 
-Set up a virtual environment:
+Next, set up a virtual environment. The instructions will vary depending on your OS of choice.
 
-On *nix:
+* Linux/macOS:
 
 ```bash
 python3 -m venv venv && source ./venv/bin/activate
 ```
 
-On Windows:
+* Windows (PowerShell):
 
 ```powershell
 python3 -m venv venv && .\venv\Scripts\Activate.ps1
 ```
 
-Now you can install the packages:
+Now install all the dependencies:
+
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt # or you can install them manually
 ```
 
 Then, create a `.env` file containing your bot's token and the prefix you want to use:
@@ -78,7 +81,7 @@ to start the bot.
 
 # uhhh bye
 
-made with <3 by spark
+made with <3 by spark and the bolt dev team (currently only 3 people lol)
 
 contact me:
 
